@@ -11,6 +11,11 @@ WordCount1.jar: WordCount1.java
 	jar cf WordCount1.jar WordCount1*.class	
 	-rm -f WordCount1*.class
 
+UrlCount.jar: UrlCount.java
+	javac -classpath $(HADOOP_CLASSPATH) -d ./ UrlCount.java
+	jar cf UrlCount.jar UrlCount*.class
+	-rm -f UrlCount*.class
+
 prepare:
 	-hdfs dfs -mkdir input
 	curl https://en.wikipedia.org/wiki/Apache_Hadoop > /tmp/input.txt
@@ -25,6 +30,10 @@ filesystem:
 run: WordCount1.jar
 	-rm -rf output
 	hadoop jar WordCount1.jar WordCount1 input output
+
+urlcount: UrlCount.jar
+	-rm -rf output
+	hadoop jar UrlCount.jar UrlCount input output
 
 
 ##
