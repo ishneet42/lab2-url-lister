@@ -41,7 +41,7 @@ hadoop jar UrlCount.jar UrlCount input output-urlcount
 ```
 hdfs dfs -cat output-urlcount/part-r-00000 | head
 ```
-
+---
 
 ### 4. Expected Output
 
@@ -53,6 +53,8 @@ There should be four URLs with counts greater than 5, matching the assignment de
 mw-data:TemplateStyles:r1238218222      121
 mw-data:TemplateStyles:r1295599781      33
 ```
+---
+
 ## Interpretation
 
 1. **2-node cluster was faster** for this dataset.  
@@ -65,7 +67,12 @@ mw-data:TemplateStyles:r1295599781      33
 
 3. **Same final output**:  
    - Number of reduce output records = **7**.  
-   - Both clusters computed identical counts, showing Hadoop’s determinism regardless of cluster size.  
+   - Both clusters computed identical counts, showing Hadoop’s determinism regardless of cluster size.
+  
+## Resources used
+
+- Resources used: course materials and readme provided, Hadoop documentation, and the official Google Cloud Dataproc documentation.  
+
 
 ---
 
