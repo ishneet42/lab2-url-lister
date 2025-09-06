@@ -71,8 +71,28 @@ mw-data:TemplateStyles:r1295599781      33
   
 ## Resources used
 
-- Resources used: course materials and readme provided, Hadoop documentation, and the official Google Cloud Dataproc documentation.  
+- Resources used: course materials and readme provided, Hadoop documentation, and the official Google Cloud Dataproc documentation.
 
+---
+## Execution Time Comparison
+
+### 2-Node Cluster
+- Total time spent by all map tasks: **20,089 ms**
+- Total time spent by all reduce tasks: **17,942 ms**
+
+```
+Total time spent by all map tasks (ms)=20089
+Total time spent by all reduce tasks (ms)=17942
+```
+
+### 4-Node Cluster
+- Total time spent by all map tasks: **29,773 ms**
+- Total time spent by all reduce tasks: **98,547 ms**
+
+```
+Total time spent by all map tasks (ms)=29773
+Total time spent by all reduce tasks (ms)=98547
+```
 
 ---
 
