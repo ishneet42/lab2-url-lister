@@ -3,12 +3,11 @@ USER=$(shell whoami)
 ##
 ## Configure the Hadoop classpath for the GCP dataproc enviornment
 ##
-
 HADOOP_CLASSPATH=$(shell hadoop classpath)
 
 WordCount1.jar: WordCount1.java
 	javac -classpath $(HADOOP_CLASSPATH) -d ./ WordCount1.java
-	jar cf WordCount1.jar WordCount1*.class	
+	jar cf WordCount1.jar WordCount1*.class 
 	-rm -f WordCount1*.class
 
 UrlCount.jar: UrlCount.java
@@ -17,7 +16,8 @@ UrlCount.jar: UrlCount.java
 	-rm -f UrlCount*.class
 
 prepare:
-	-hdfs dfs -mkdir input
+	-hdfs dfs -rm -r -f input
+	hdfs dfs -mkdir input
 	curl https://en.wikipedia.org/wiki/Apache_Hadoop > /tmp/input.txt
 	hdfs dfs -put /tmp/input.txt input/file01
 	curl https://en.wikipedia.org/wiki/MapReduce > /tmp/input.txt
@@ -28,14 +28,13 @@ filesystem:
 	-hdfs dfs -mkdir /user/$(USER)
 
 run: WordCount1.jar
-	-rm -rf output
+	-hdfs dfs -rm -r -f output
 	hadoop jar WordCount1.jar WordCount1 input output
 
 urlcount: UrlCount.jar
-	-rm -rf output
+	-hdfs dfs -rm -r -f output
 	hadoop jar UrlCount.jar UrlCount input output
-
-
+	hdfs dfs -cat output/part-*
 ##
 ## You may need to change the path for this depending
 ## on your Hadoop / java setup
